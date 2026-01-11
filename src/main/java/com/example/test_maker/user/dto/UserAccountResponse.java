@@ -10,7 +10,6 @@ public class UserAccountResponse {
     private Long id;
     private String username;
     private String email;
-    private List<QuizAttemptResponse> quizAttempts = new ArrayList<>();
 
     public UserAccountResponse() {
     }
@@ -29,14 +28,6 @@ public class UserAccountResponse {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<QuizAttemptResponse> getQuizAttempts() {
-        return quizAttempts;
-    }
-
-    public void setQuizAttempts(List<QuizAttemptResponse> quizAttempts) {
-        this.quizAttempts = quizAttempts;
     }
 
     public Long getId() {

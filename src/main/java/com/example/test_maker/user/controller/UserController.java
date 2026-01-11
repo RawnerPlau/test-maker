@@ -1,6 +1,7 @@
 package com.example.test_maker.user.controller;
 
 import com.example.test_maker.user.dto.UserAccountRequest;
+import com.example.test_maker.user.dto.ValidateUserRequest;
 import com.example.test_maker.user.dto.UserAccountResponse;
 import com.example.test_maker.user.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserAccountResponse> validateUser(@RequestBody UserAccountRequest userAccountRequest){
-        return ResponseEntity.ok(userService.validateUser(userAccountRequest));
+    public ResponseEntity<UserAccountResponse> validateUser(@RequestBody ValidateUserRequest validateUserRequest){
+        return ResponseEntity.ok(userService.validateUser(validateUserRequest));
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<UserAccountResponse> createUser(@RequestBody UserAccountRequest userAccountRequest){
+        return ResponseEntity.ok(userService.createUser(userAccountRequest));
     }
 }

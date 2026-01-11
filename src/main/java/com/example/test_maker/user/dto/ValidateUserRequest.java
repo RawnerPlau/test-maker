@@ -1,11 +1,10 @@
 package com.example.test_maker.user.dto;
 
-public class UserAccountRequest {
+public class ValidateUserRequest {
     private String username;
     private String password;
-    private String email;
 
-    public UserAccountRequest() {
+    public ValidateUserRequest() {
     }
 
     public String getUsername() {
@@ -22,13 +21,5 @@ public class UserAccountRequest {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
