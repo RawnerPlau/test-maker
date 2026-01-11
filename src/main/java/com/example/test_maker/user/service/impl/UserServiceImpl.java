@@ -38,12 +38,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserAccountResponse updateUser(Long id, UserAccountRequest userAccountRequest) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+        User user = getUserById(id);
         user.setUsername(userAccountRequest.getUsername());
         user.setEmail(userAccountRequest.getEmail());
         user.setPassword(userAccountRequest.getPassword());
         User updatedUser = userRepository.save(user);
         return UserMapper.toUserAccountResponse(updatedUser);
+    }
+
+    @Override
+    public UserAccountResponse getUser(Long id) {
+        User user = getUserById(id);
+        return UserMapper.toUserAccountResponse(user);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        User user = getUserById(id);
+        userRepository.delete(user);
+    }
+
+    public User getUserById (Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found"));
     }
 }
