@@ -1,5 +1,6 @@
 package com.example.test_maker.user.service.impl;
 
+import com.example.test_maker.exception.BadRequestException;
 import com.example.test_maker.user.dto.UserAccountRequest;
 import com.example.test_maker.user.dto.UserAccountResponse;
 import com.example.test_maker.user.entity.User;
@@ -19,9 +20,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserAccountResponse validateUser(UserAccountRequest userAccountRequest) {
         User user = userRepository.findByUsername(userAccountRequest.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new BadRequestException("User not found"));
         if (!user.getPassword().equals(userAccountRequest.getPassword())){
-            throw new RuntimeException("Wrong password");
+            throw new BadRequestException("Wrong password");
         }
         return UserMapper.toUserAccountResponse(user);
     }
