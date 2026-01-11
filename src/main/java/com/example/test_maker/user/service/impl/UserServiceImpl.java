@@ -1,6 +1,7 @@
 package com.example.test_maker.user.service.impl;
 
 import com.example.test_maker.exception.BadRequestException;
+import com.example.test_maker.exception.NotFoundException;
 import com.example.test_maker.user.dto.UserAccountRequest;
 import com.example.test_maker.user.dto.ValidateUserRequest;
 import com.example.test_maker.user.dto.UserAccountResponse;
@@ -33,5 +34,16 @@ public class UserServiceImpl implements UserService {
         User user = UserMapper.toUser(userAccountRequest);
         User newUser = userRepository.save(user);
         return UserMapper.toUserAccountResponse(newUser);
+    }
+
+    @Override
+    public UserAccountResponse updateUser(Long id, UserAccountRequest userAccountRequest) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found"));
+        user.setUsername(userAccountRequest.getUsername());
+        user.setEmail(userAccountRequest.getEmail());
+        user.setPassword(userAccountRequest.getPassword());
+        User updatedUser = userRepository.save(user);
+        return UserMapper.toUserAccountResponse(updatedUser);
     }
 }

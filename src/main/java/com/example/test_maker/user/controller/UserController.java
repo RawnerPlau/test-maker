@@ -5,10 +5,7 @@ import com.example.test_maker.user.dto.ValidateUserRequest;
 import com.example.test_maker.user.dto.UserAccountResponse;
 import com.example.test_maker.user.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -27,5 +24,10 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<UserAccountResponse> createUser(@RequestBody UserAccountRequest userAccountRequest){
         return ResponseEntity.ok(userService.createUser(userAccountRequest));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserAccountResponse> updateUser(@PathVariable Long id, @RequestBody UserAccountRequest userAccountRequest){
+        return ResponseEntity.ok(userService.updateUser(id, userAccountRequest));
     }
 }
